@@ -1,0 +1,12 @@
+[package]
+name = "vrchat-osc-chat"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+actix-cors = "0.6"
+actix-web = "4"
+rosc = "0.7"
+tokio = { version = "1", features = ["full"] }
+if-addrs = "0.13"
+ipnetwork = "0.17"
