@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
     <title>VRchat - 聊天界面</title>
     <style>
       body {
@@ -296,7 +297,7 @@
     <script>
       // 默认服务器地址
       let serverUrl =
-        localStorage.getItem("serverUrl") || "http://127.0.0.1:8080";
+        localStorage.getItem("serverUrl") || "http://127.0.0.1:18080";
       document.getElementById("ipInput").value = serverUrl;
 
       // 加载历史消息
