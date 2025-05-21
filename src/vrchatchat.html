@@ -356,40 +356,44 @@
       function saveServerUrl() {
         let val = document.getElementById("ipInput").value.trim();
         if (!val) return;
-        // 自动补全
+
+        // 自动补全http://
         if (!/^https?:\/\//.test(val)) {
           val = "http://" + val;
         }
-        // 自动补端口
-        let urlObj;
+
         try {
-          urlObj = new URL(val);
-        } catch {
+          // 解析URL
+          const urlObj = new URL(val);
+
+          // 如果没有端口号，添加默认端口
+          if (!urlObj.port) {
+            urlObj.port = "8080";
+          }
+
+          // 构建最终的URL
+          serverUrl = `${urlObj.protocol}//${urlObj.hostname}:${urlObj.port}`;
+
+          localStorage.setItem("serverUrl", serverUrl);
+          // 更新输入框的值
+          document.getElementById("ipInput").value = serverUrl;
+          showModal({
+            title: "保存成功",
+            content:
+              "服务器地址已保存:<br><span style='color:#ff7fae'>" +
+              serverUrl +
+              "</span>",
+            confirmText: "知道了",
+            onConfirm: function () {},
+          });
+        } catch (error) {
           showModal({
             title: "地址格式错误",
             content: "请输入正确的服务器地址！",
             confirmText: "知道了",
             onConfirm: function () {},
           });
-          return;
         }
-        if (!urlObj.port) {
-          urlObj.port = "18080";
-          val = urlObj.origin + ":18080";
-        } else {
-          val = urlObj.origin;
-        }
-        serverUrl = val;
-        localStorage.setItem("serverUrl", serverUrl);
-        showModal({
-          title: "保存成功",
-          content:
-            "服务器地址已保存:<br><span style='color:#ff7fae'>" +
-            serverUrl +
-            "</span>",
-          confirmText: "知道了",
-          onConfirm: function () {},
-        });
       }
       // 清空聊天记录
       function clearMessages() {
