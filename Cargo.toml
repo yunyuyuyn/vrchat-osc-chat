@@ -4,9 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-actix-cors = "0.6"
-actix-web = "4"
-rosc = "0.7"
-tokio = { version = "1", features = ["full"] }
-if-addrs = "0.13"
-ipnetwork = "0.17"
+actix-web = "4"        # 内置了CORS中间件和tokio运行时
+actix-cors = "0.7"
+rosc = "0.7"           # OSC协议处理
+if-addrs = "0.13"      # 跨平台的网络接口查询
